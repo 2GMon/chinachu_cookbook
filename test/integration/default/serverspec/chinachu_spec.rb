@@ -4,7 +4,7 @@ set :backend, :exec
 
 describe "packages installed" do
   %w!build-essential curl git-core libssl-dev yasm
-  libtool autoconf libboost-all-dev!.each do |pkg|
+  libtool autoconf libboost-all-dev expect!.each do |pkg|
     context package(pkg) do
       it { should be_installed }
     end

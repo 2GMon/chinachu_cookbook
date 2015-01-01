@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 %w!build-essential curl git-core libssl-dev yasm
-  libtool autoconf libboost-all-dev!.each do |pkg|
+  libtool autoconf libboost-all-dev expect!.each do |pkg|
   package pkg do
     action :install
   end
