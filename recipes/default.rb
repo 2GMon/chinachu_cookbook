@@ -21,7 +21,12 @@ user 'chinachu' do
 end
 
 group 'sudo' do
-  action :modify
   members 'chinachu'
   append true
+  notifies :sync, 'git[/home/chinachu/chinachu]', :immediately
+end
+
+git '/home/chinachu/chinachu' do
+  repository 'git://github.com/kanreisa/Chinachu.git'
+  user 'chinachu'
 end

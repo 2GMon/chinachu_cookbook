@@ -16,3 +16,7 @@ describe user('chinachu') do
   it { should belong_to_group 'sudo' }
   it { should have_home_directory '/home/chinachu' }
 end
+
+describe file('/home/chinachu/chinachu') do
+  it { should be_directory }
+end
