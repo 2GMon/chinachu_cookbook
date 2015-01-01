@@ -1,0 +1,9 @@
+DEPENDENCIES
+  apt
+  chinachu
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.6.1)
+  chinachu (0.1.0)
