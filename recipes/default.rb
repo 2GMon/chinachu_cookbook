@@ -15,7 +15,9 @@ end
 
 user 'chinachu' do
   action :create
-  supports mnage_home: true
+  supports manage_home: true
+  home "/home/chinachu"
+  notifies :modify, 'group[sudo]', :immediately
 end
 
 group 'sudo' do
