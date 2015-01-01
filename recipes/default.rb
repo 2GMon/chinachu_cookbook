@@ -13,6 +13,18 @@
   end
 end
 
+execute 'install_yasm' do
+  command "wget -O - http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz | tar zxvf - && cd yasm-1.2.0
+./configure --prefix /usr/local && make && make install
+"
+  user "root"
+  cwd "/root"
+  not_if do
+    File.exists?("/usr/local/include/libyasm") &&
+      File.exists?("/usr/local/lib/libyasm.a")
+  end
+end
+
 user 'chinachu' do
   action :create
   supports manage_home: true
