@@ -25,36 +25,36 @@ execute 'install_yasm' do
   end
 end
 
-user 'chinachu' do
+user node['chinachu']['user'] do
   action :create
   supports manage_home: true
   shell "/bin/bash"
-  home "/home/chinachu"
+  home "/home/#{node['chinachu']['user']}"
   notifies :modify, 'group[sudo]', :immediately
 end
 
 group 'sudo' do
-  members 'chinachu'
+  members node['chinachu']['user']
   append true
 end
 
-git '/home/chinachu/chinachu' do
+git "/home/#{node['chinachu']['user']}/chinachu" do
   repository 'git://github.com/kanreisa/Chinachu.git'
-  user 'chinachu'
-  group 'chinachu'
+  user node['chinachu']['user']
+  group node['chinachu']['user']
   notifies :run, 'execute[install_chinachu]', :immediately
 end
 
 execute "install_chinachu" do
   action :nothing
-  group 'chinachu'
-  user 'chinachu'
-  cwd '/home/chinachu/chinachu'
+  group node['chinachu']['user']
+  user node['chinachu']['user']
+  cwd "/home/#{node['chinachu']['user']}/chinachu"
   environment('HOME' => '/home/chinachu')
   command "echo 1 | ./chinachu installer"
   not_if do
-    File.exists?("/home/chinachu/chinachu/node_modules") &&
-    File.exists?("/home/chinachu/chinachu/usr/bin/epgdump")
+    File.exists?("/home/#{node['chinachu']['user']}/chinachu/node_modules") &&
+    File.exists?("/home/#{node['chinachu']['user']}/chinachu/usr/bin/epgdump")
   end
   notifies :run, 'script[install_chinachu_init_script]', :immediately
 end
@@ -62,10 +62,10 @@ end
 script "install_chinachu_init_script" do
   action :nothing
   interpreter '/bin/bash'
-  cwd '/home/chinachu/chinachu'
+  cwd "/home/#{node['chinachu']['user']}/chinachu"
   user 'root'
   group 'root'
-  environment('USER' => 'chinachu')
+  environment('USER' => node['chinachu']['user'])
   code <<-EOF
   ./chinachu service operator initscript > /tmp/chinachu-operator
   ./chinachu service wui initscript > /tmp/chinachu-wui

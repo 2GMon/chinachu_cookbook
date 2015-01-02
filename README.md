@@ -16,9 +16,6 @@ Requirements
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
 #### chinachu::default
 <table>
   <tr>
@@ -28,10 +25,10 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['chinachu']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['chinachu']['user']</tt></td>
+    <td>String</td>
+    <td>chinachu install user</td>
+    <td><tt>chinachu</tt></td>
   </tr>
 </table>
 

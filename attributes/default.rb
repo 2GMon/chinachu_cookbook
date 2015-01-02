@@ -1,0 +1,1 @@
+default['chinachu']['user'] = 'chinachu'
