@@ -31,6 +31,48 @@ describe user('chinachu') do
   it { should have_home_directory '/home/chinachu' }
 end
 
-describe file('/home/chinachu/chinachu') do
-  it { should be_directory }
+describe 'chinachu installed' do
+  %w!/home/chinachu/chinachu
+  /home/chinachu/chinachu/node_modules!.each do |f|
+    context file(f) do
+      it { should be_directory }
+      it { should be_owned_by 'chinachu' }
+      it { should be_mode 755 }
+    end
+  end
+
+  %w!/home/chinachu/chinachu/.nave/node
+  /home/chinachu/chinachu/.nave/npm!.each do |f|
+    context file(f) do
+      it { should be_symlink }
+      it { should be_mode 777 }
+      it { should be_owned_by 'chinachu' }
+    end
+  end
+
+  %w!/home/chinachu/chinachu/usr/bin/avconv
+  /home/chinachu/chinachu/usr/bin/avprobe
+  /home/chinachu/chinachu/usr/bin/epgdump!.each do |f|
+    context file(f) do
+      it { should be_file }
+      it { should be_mode 755 }
+      it { should be_owned_by 'chinachu' }
+    end
+  end
+
+  %w!/etc/init.d/chinachu-operator
+  /etc/init.d/chinachu-wui!.each do |f|
+    context file(f) do
+      it { should be_file }
+      it { should be_mode 755 }
+      it {should be_owned_by 'root' }
+    end
+  end
+
+  %w!chinachu-operator chinachu-wui!.each do |srv|
+    context service(srv) do
+      it { should be_enabled }
+      it { should be_running }
+    end
+  end
 end
