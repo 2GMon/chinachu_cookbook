@@ -30,6 +30,12 @@ Attributes
     <td>chinachu install user</td>
     <td><tt>chinachu</tt></td>
   </tr>
+  <tr>
+    <td><tt>['chinachu']['server_name']</tt></td>
+    <td>String</td>
+    <td>server name</td>
+    <td><tt>www.example.com</tt></td>
+  </tr>
 </table>
 
 Usage

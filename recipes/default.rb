@@ -84,3 +84,20 @@ end
     supports restart: true
   end
 end
+
+package 'nginx' do
+  action :install
+end
+
+template '/etc/nginx/nginx.conf' do
+  source 'nginx.conf.erb'
+  mode "0644"
+  owner 'root'
+  group 'root'
+  notifies :restart, 'service[nginx]', :immediately
+end
+
+service 'nginx' do
+  action [ :enable, :start ]
+  supports restart: true
+end

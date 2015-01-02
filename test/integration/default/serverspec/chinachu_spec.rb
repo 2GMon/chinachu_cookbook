@@ -76,3 +76,20 @@ describe 'chinachu installed' do
     end
   end
 end
+
+describe 'nginx installed' do
+  context package('nginx') do
+    it { should be_installed }
+  end
+
+  context service('nginx') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+
+  context file('/etc/nginx/nginx.conf') do
+    it { should be_file }
+    it { should be_mode 644 }
+    it { should be_owned_by 'root' }
+  end
+end
