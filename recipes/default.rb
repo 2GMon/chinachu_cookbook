@@ -6,6 +6,14 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+apt_repository 'nginx' do
+  uri          'http://nginx.org/packages/debian/'
+  distribution node['chinachu']['codename']
+  components   ['nginx']
+  key          'http://nginx.org/keys/nginx_signing.key'
+  deb_src      true
+end
+
 %w!build-essential curl git-core libssl-dev yasm
   libtool autoconf libboost-all-dev expect!.each do |pkg|
   package pkg do

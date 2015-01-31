@@ -36,6 +36,12 @@ Attributes
     <td>server name</td>
     <td><tt>www.example.com</tt></td>
   </tr>
+  <tr>
+    <td><tt>['chinachu']['codename']</tt></td>
+    <td>String</td>
+    <td>Debian codename</td>
+    <td><tt>wheezy</tt></td>
+  </tr>
 </table>
 
 Usage
